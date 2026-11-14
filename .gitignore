@@ -1,0 +1,11 @@
+.env
+.env.*
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.embedding_cache/
+.gradio/
+.vscode/
+.idea/
+positive_parenting/*.pdf
