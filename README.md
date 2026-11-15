@@ -17,9 +17,8 @@ When `app.py` starts, it:
    text into 700-character chunks with 50-character overlap.
 3. Embeds the chunks using OpenAI's `text-embedding-3-small` model and adds
    them to Pinecone.
-4. Starts a Gradio chat interface. For each question, it retrieves the ten
-   most similar chunks and asks the `gpt-6.1-sol` chat model to answer in at
-   most five sentences. If the context does not contain an answer, the prompt
+4. Starts a Gradio chat interface. For each question, it retrieves the six
+   most similar chunks and asks the `gpt-6.1-sol` chat model to answer clear and concise answer. If the context does not contain an answer, the prompt
    tells the model to say it cannot find one.
 
 The chat UI saves conversation history, but the current retrieval chain answers
@@ -53,11 +52,8 @@ Run these commands from the project directory in PowerShell:
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
-python -m pip install -r Requirements.txt langchain-community langchain-text-splitters langchain-classic python-dotenv
+python -m pip install -r requirements.txt
 ```
-
-The additional packages on the last line are imported by `app.py` but are not
-currently listed in `Requirements.txt`.
 
 Create a `.env` file in the project root and set your credentials. The app reads
 these values with `python-dotenv`:
@@ -84,9 +80,11 @@ the documents.
 
 - The app checks whether each downloaded PDF already exists, so it does not
   download those files again unless they are removed.
-- The app adds all PDF chunks to Pinecone every time it starts. Repeated runs
-  may add duplicate vectors and incur additional embedding/API usage; the
-  current code does not check whether documents have already been indexed.
+- The app upserts PDF chunks to Pinecone using stable IDs based on each chunk's
+  source, page, and text, so restarting does not create duplicate vectors.
+  Existing chunks are still re-embedded and upserted, which incurs embedding/API
+  usage. Vectors created by earlier versions with generated IDs are not removed
+  automatically.
 - The Pinecone index name, region, embedding dimensions, chunk size, retrieval
   count, and model names are configured directly in `app.py`.
 - The app requires working OpenAI and Pinecone credentials and network access.
