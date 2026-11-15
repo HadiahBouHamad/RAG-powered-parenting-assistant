@@ -1,0 +1,40 @@
+.gradio-container {
+    background: linear-gradient(180deg, #f8fafc 0%, #eef4ff 100%);
+}
+
+.source-box {
+    margin-top: 1.25rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid #dfe9ff;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #f8fbff 0%, #eef5ff 100%);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.06);
+}
+
+.source-label {
+    margin-bottom: 0.7rem;
+    color: #64748b;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.source-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.source-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid #bfd7ff;
+    border-radius: 999px;
+    background: #e0ecff;
+    color: #1d4ed8;
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
